@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SliderService} from '../../../services/slider.service';
 import {Slider} from '../../../DTOs/Sliders/Slider';
 
+declare function homeSlider(): any;
+
 @Component({
   selector: 'app-index-slider',
   templateUrl: './slider.component.html',
@@ -9,7 +11,7 @@ import {Slider} from '../../../DTOs/Sliders/Slider';
 })
 export class SliderComponent implements OnInit {
 
-  private sliders: Slider[] = [];
+  public sliders: Slider[] = [];
 
   constructor(
     private sliderService: SliderService
@@ -27,8 +29,10 @@ export class SliderComponent implements OnInit {
         });
       } else {
         this.sliders = sliders;
+        setInterval(() => {
+          homeSlider();
+        }, 100);
       }
-      console.log(this.sliders);
     });
   }
 }

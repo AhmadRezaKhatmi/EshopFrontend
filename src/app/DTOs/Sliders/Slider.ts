@@ -1,13 +1,13 @@
 export class Slider {
   constructor(
-    id: number,
-    imageName: string,
-    title: string,
-    description: string,
-    link: string,
-    isDelete: boolean,
-    createDate: Date,
-    lastUpdateDate: Date
+    public id: number,
+    public imageName: string,
+    public title: string,
+    public description: string,
+    public link: string,
+    public  isDelete: boolean,
+    public createDate: Date,
+    public lastUpdateDate: Date
   ) {
   }
 }

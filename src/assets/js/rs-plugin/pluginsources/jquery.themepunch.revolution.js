@@ -1,7 +1,7 @@
 
 
 /**************************************************************************
- * jquery.themepunch.revolution.js - jQuery Plugin for Revolution Slider
+ * jquery.themepunch.revolution.js - jQuery Plugin for Revolution Sliders
  * @version: 3.0.8 (06.08.2013)
  * @requires jQuery v1.7 or later (tested on 1.9)
  * @author ThemePunch
@@ -103,7 +103,7 @@
 										versionIncrement = parseFloat(version[2] || '0');
 
 									if (versionTop==1 && versionMinor < 7) {
-										container.html('<div style="text-align:center; padding:40px 0px; font-size:20px; color:#992222;"> The Current Version of jQuery:'+version+' <br>Please update your jQuery Version to min. 1.7 in Case you wish to use the Revolution Slider Plugin</div>');
+										container.html('<div style="text-align:center; padding:40px 0px; font-size:20px; color:#992222;"> The Current Version of jQuery:'+version+' <br>Please update your jQuery Version to min. 1.7 in Case you wish to use the Revolution Sliders Plugin</div>');
 									}
 
 									if (versionTop>1) opt.ie=false;
@@ -126,14 +126,14 @@
 									 // LOAD THE YOUTUBE API IF NECESSARY
 
 									container.find('.caption').each(function() { jQuery(this).addClass('tp-caption')});
-									
+
 									if (is_mobile()) {
 										container.find('.tp-caption').each(function() {
 											if (jQuery(this).data('autoplay')==true) jQuery(this).data('autoplay',false);
 										})
 									}
-									
-									
+
+
 									var addedyt=0;
 									var addedvim=0;
 									var addedvid=0;
@@ -523,16 +523,16 @@
 
 			container.find('.defaultimg').each(function(i) {
 						var img = jQuery(this);
-						
 
-						if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined) 						
-								setSize(img,opt);							
+
+						if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined)
+								setSize(img,opt);
 
 						opt.height = Math.round(opt.startheight * (opt.width/opt.startwidth));
 
 						container.height(opt.height);
 
-						if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined) 
+						if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined)
 								setSize(img,opt);
 
 
@@ -568,7 +568,7 @@
 
 			    if (navigator.userAgent.split(agents[i]).length>1) {
 		            ismobile = true;
-        				
+
 		          }
 		    }
 		    return ismobile;
@@ -1092,7 +1092,7 @@
 		function setSize(img,opt) {
 
 
-						
+
 						opt.width=parseInt(opt.container.width(),0);
 						opt.height=parseInt(opt.container.height(),0);
 
@@ -1131,7 +1131,7 @@
 
 						if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined) {
 							if (img.data('orgw')==undefined || img.data('orgw')==0) {
-								
+
 
 								img.data('orgw',img.width());
 								img.data('orgh',img.height());
@@ -1183,7 +1183,7 @@
 									img.css({'position':'absolute','top':img.data('fyof')+"px",'left':img.data('fxof')+"px"});
 
 								 }
-								 
+
 
 
 						} else
@@ -1252,9 +1252,9 @@
 
 								 }
 
-								 
 
-								 
+
+
 						}  else {
 								if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined) {
 									img.width(opt.width);
@@ -1268,20 +1268,20 @@
 										img.width(img.data('orgw')*fh);
 									}
 								}
-								
+
 
 						}
 
 
 
-					
-						
+
+
 						if ((img.data('lazyload') !=undefined && img.data('lazydone') ==1) || img.data('lazyload') ===undefined) {
 
 							img.data('neww',img.width());
 							img.data('newh',img.height());
 						}
-						
+
 						if (opt.fullWidth=="on") {
 							opt.slotw=Math.ceil(img.width()/opt.slots);
 						} else {
@@ -1588,10 +1588,10 @@
 						nextli.waitForImages(function() {
 								defimg.data('lazydone',1);
 								setTimeout(function() {restartBannerTimer(opt,container)},190);
-								
+
 								setSize(defimg,opt);
 								setBulPos(container,opt);
-								
+
 								setSize(defimg,opt);
 								swapSlideProgress(container,opt);
 								container.find('.tp-loader').transition({opacity:0,duration:300});
@@ -2626,7 +2626,7 @@
 			if (nexttrans==16) {						// PAPERCUT
 
 					if (masterspeed<600) masterspeed=600;
-					
+
 					actli.css({'position':'absolute','z-index':20});
 					nextli.css({'position':'absolute','z-index':15});
 					// PREPARE THE CUTS
@@ -2657,7 +2657,7 @@
 					actli.find('.tp-half-two').css({'width':oow+"px",'height':(imgh)+"px",'overflow':'hidden','position':'absolute','top':(imgh)+'px','left':'0px'});
 					actli.find('.tp-half-two .tp-offset').css({'position':'absolute','top':(0-imgh)+'px','left':'0px'});
 
-				
+
 
 
 					// Delegate .transition() calls to .animate()

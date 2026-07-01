@@ -1,12 +1,12 @@
 /*jshint forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, jquery:true, indent:4, maxerr:50 */
 /* global _, Tour */
 
-//  ========== 
-//  = Custom JS and jQuery = 
-//  ========== 
+//  ==========
+//  = Custom JS and jQuery =
+//  ==========
 // variables
 var WebMarketVars = {
-    currencyBefore: true, // true foe the currencies like USD, where the symbol comes before the number ($123.45). False for the symbol after the number (123,45 €) 
+    currencyBefore: true, // true foe the currencies like USD, where the symbol comes before the number ($123.45). False for the symbol after the number (123,45 €)
     currencySymbol: "$",
     priceRange: [ 0, 1750 ], // minimum and maximum range for the price range selector
     priceStep: 50
@@ -14,14 +14,14 @@ var WebMarketVars = {
 
 jQuery(document).ready(function($) {
     "use strict";
-    
+
     /**
      * Set the ie10 class to html tag for IE10
      */
-    if (/*@cc_on!@*/false) {  
-        document.documentElement.className+=' ie10';  
-    }  
-    
+    if (/*@cc_on!@*/false) {
+        document.documentElement.className+=' ie10';
+    }
+
     /**
      * Below the first responsive break we assume touch behaviour
      */
@@ -34,8 +34,8 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Smooth scroll to the top of the page & scroll menu = 
+    //  ==========
+    //  = Smooth scroll to the top of the page & scroll menu =
     //  ==========
     $("#toTheTop").click(function() {
         $("html, body").animate({
@@ -50,8 +50,8 @@ jQuery(document).ready(function($) {
         }, 700, "easeInOutQuart");
         return false;
     });
-    //  ========== 
-    //  = Carousel = 
+    //  ==========
+    //  = Carousel =
     //  ==========
     $(window).load(function() {
         var configuration = {
@@ -101,9 +101,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Revolution Slider = 
-    //  ========== 
+    //  ==========
+    //  = Revolution Sliders =
+    //  ==========
     if (jQuery().revolution) {
         var $mainSlider = $(".fullwidthbanner").revolution({
             delay: 1e4,
@@ -130,7 +130,7 @@ jQuery(document).ready(function($) {
             shadow: 0,
             fullWidth: "on"
         });
-        
+
         $('#sliderRevLeft').on('click', function() {
             $mainSlider.revprev();
             return false;
@@ -139,7 +139,7 @@ jQuery(document).ready(function($) {
             $mainSlider.revnext();
             return false;
         });
-        
+
     }
     //  ==========
     //  = Add prettyPhoto for images with class .add-prettyphoto =
@@ -162,9 +162,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Nav Search = 
-    //  ========== 
+    //  ==========
+    //  = Nav Search =
+    //  ==========
     $(document).on("focus", ".large-screen #navSearchInput", function() {
         $(this).parent().parent().addClass("search-mode");
         repositionLine();
@@ -181,9 +181,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Scroll inspector = 
-    //  ========== 
+    //  ==========
+    //  = Scroll inspector =
+    //  ==========
     var stickyNavbar = function() {
         if (isTouch()) {
             $(window).off("scroll.onlyDesktop");
@@ -208,9 +208,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Thumbnail selector = 
-    //  ========== 
+    //  ==========
+    //  = Thumbnail selector =
+    //  ==========
     $(".product-preview .thumbs a").click(function(ev) {
         ev.preventDefault();
         $($(this).attr("href")).attr("src", $(this).find("img").attr("src"));
@@ -219,8 +219,8 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Forms = 
+    //  ==========
+    //  = Forms =
     //  ==========
     $(".numbered > .clickable").click(function(ev) {
         ev.preventDefault();
@@ -238,12 +238,12 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Isotope = 
-    //  ========== 
+    //  ==========
+    //  = Isotope =
+    //  ==========
     (function() {
         var $container = $("#isotopeContainer");
-    
+
         $container.imagesLoaded(function() {
             $container.isotope({
                 itemSelector: ".span3",
@@ -260,7 +260,7 @@ jQuery(document).ready(function($) {
                     }
                 }
             });
-            
+
             // jQuery UI slider
             var prepareCurrency = function(value) {
                 return WebMarketVars.currencyBefore ? WebMarketVars.currencySymbol + value : value + WebMarketVars.currencySymbol;
@@ -285,9 +285,9 @@ jQuery(document).ready(function($) {
                     $sliderParent.find(".max-val").val(prepareCurrency($(this).slider("values", 1)));
                 }
             });
-            //  ========== 
-            //  = Filters for sidebar = 
-            //  ========== 
+            //  ==========
+            //  = Filters for sidebar =
+            //  ==========
             var $selectableElms = $(".sidebar-filters .selectable");
             $selectableElms.click(function(ev) {
                 ev.preventDefault();
@@ -354,9 +354,9 @@ jQuery(document).ready(function($) {
                 });
             };
             updateIsotopeFiltering();
-            //  ========== 
-            //  = Sorting = 
-            //  ========== 
+            //  ==========
+            //  = Sorting =
+            //  ==========
             $("#isotopeSorting").change(function() {
                 var parameters = jQuery.parseJSON($(this).val());
                 parameters.sortAscending = "true" === parameters.sortAscending ? true : false;
@@ -368,9 +368,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Tour = 
-    //  ========== 
+    //  ==========
+    //  = Tour =
+    //  ==========
     (function() {
         var tour = new Tour({
             useLocalStorage: true,
@@ -404,9 +404,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Google Maps API with GoMap jQuery plugin = 
-    //  ========== 
+    //  ==========
+    //  = Google Maps API with GoMap jQuery plugin =
+    //  ==========
     $(".add-googlemap").each(function() {
         var $this = $(this);
         $this.css("height", typeof $this.data("height") === "undefined" ? 200 : parseInt($this.data("height"), 10));
@@ -425,9 +425,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Cart Container Effects = 
-    //  ========== 
+    //  ==========
+    //  = Cart Container Effects =
+    //  ==========
     $("#cartContainer").hover(function() {
         $(this).children(".cart").addClass("opened");
         $(this).children(".open-panel").stop(true, true).slideDown(150);
@@ -450,9 +450,9 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Checkout Process Effects = 
-    //  ========== 
+    //  ==========
+    //  = Checkout Process Effects =
+    //  ==========
     // delete the item from review table
     $(".table-items .icon-remove-sign").click(function() {
         $(this).parents("tr").animate({
@@ -475,8 +475,8 @@ jQuery(document).ready(function($) {
 
 
 
-    //  ========== 
-    //  = Functions which has to be reinitiated when the window size is changed = 
+    //  ==========
+    //  = Functions which has to be reinitiated when the window size is changed =
     //  ==========
     var triggeredOnResize = function() {
         if ($("html").hasClass("lt-ie9")) {
@@ -488,18 +488,18 @@ jQuery(document).ready(function($) {
             var $this = $(this);
             $this.trigger("configuration", [ "debug", false, true ]);
         });
-        //  = Embedded video iframes = 
+        //  = Embedded video iframes =
         $('iframe[src*="vimeo.com"], iframe[src*="youtube.com"]').each(function() {
             var $this = $(this);
             $this.css("height", parseInt($this.width() * $this.attr("height") / $this.attr("width"), 10));
         });
         // sticky navbar
         stickyNavbar();
-        
-        
-        //  ========== 
-        //  = Magic Line = 
-        //  ========== 
+
+
+        //  ==========
+        //  = Magic Line =
+        //  ==========
         /**
          * @see http://css-tricks.com/jquery-magicline-navigation/
          */
@@ -542,8 +542,8 @@ jQuery(document).ready(function($) {
                 bottom: 10
             });
         }
-        
-        
+
+
         var recalculateFromBottom = function() {
             if ( !isTouch() ) {
                 $('.large-screen #spyMenu').affix({
@@ -560,7 +560,7 @@ jQuery(document).ready(function($) {
         if($('#spyMenu').length > 0) {
             recalculateFromBottom();
         }
-        
+
     };
     var fromLastResize;
     // counter in miliseconds
@@ -571,7 +571,7 @@ jQuery(document).ready(function($) {
             triggeredOnResize();
         }, 250);
     });
-    
+
     $(window).on('scroll', function() {
         if( $('#spyMenu').hasClass('affix-bottom') ) {
             $('#spyMenu').css({
@@ -581,11 +581,11 @@ jQuery(document).ready(function($) {
             $('#spyMenu').removeAttr('style');
         }
     });
-    
 
-    //  ========== 
-    //  = The language and currency switcher = 
-    //  ========== 
+
+    //  ==========
+    //  = The language and currency switcher =
+    //  ==========
     $('.js-selectable-dropdown').on('click', '.js-possibilities a', function (ev) {
         if( "#" === $(this).attr('href') ) {
             ev.preventDefault();
@@ -595,8 +595,8 @@ jQuery(document).ready(function($) {
     });
 
 
-    //  ========== 
-    //  = Last but not the least - trigger the page scroll and resize = 
-    //  ========== 
+    //  ==========
+    //  = Last but not the least - trigger the page scroll and resize =
+    //  ==========
     $(window).trigger("scroll").trigger("resize");
 });

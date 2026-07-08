@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SliderService} from '../../../services/slider.service';
 import {Slider} from '../../../DTOs/Sliders/Slider';
+import {DomainName} from '../../../Utilities/PathTools';
 
 declare function homeSlider(): any;
 
@@ -12,6 +13,7 @@ declare function homeSlider(): any;
 export class SliderComponent implements OnInit {
 
   public sliders: Slider[] = [];
+  public domain: string = DomainName;
 
   constructor(
     private sliderService: SliderService

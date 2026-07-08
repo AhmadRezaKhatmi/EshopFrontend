@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HomeSliderResponse} from '../DTOs/Sliders/HomeSliderResponse';
 import {Slider} from '../DTOs/Sliders/Slider';
+import {DomainName} from '../Utilities/PathTools';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import {Slider} from '../DTOs/Sliders/Slider';
 export class SliderService {
 
   private homeSliders: BehaviorSubject<Slider[]> = new BehaviorSubject<Slider[]>(null);
+  private domain = DomainName;
 
   constructor(
     private http: HttpClient
@@ -17,7 +19,7 @@ export class SliderService {
   }
 
   public GetSliders(): Observable<HomeSliderResponse> {
-    return this.http.get<HomeSliderResponse>('https://localhost:44381/slider/GetActiveSliders');
+    return this.http.get<HomeSliderResponse>('/slider/GetActiveSliders');
   }
 
   public getCurrentSliders(): Observable<Slider[]> {

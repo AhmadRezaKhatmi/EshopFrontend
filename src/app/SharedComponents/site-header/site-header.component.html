@@ -87,8 +87,8 @@
           <!--  ==========  -->
           <div class="nav-collapse collapse">
             <ul class="nav" id="mainNavigation">
-              <li class="dropdown active">
-                <a href="index.html" class="dropdown-toggle"> خانه <b class="caret"></b> </a>
+              <li class="dropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <a [routerLink]="''" class="dropdown-toggle"> خانه <b class="caret"></b> </a>
                 <ul class="dropdown-menu">
                   <li class="dropdown active">
                     <a href="index.html"><i class="icon-caret-left pull-right visible-desktop"></i> رنگ های پوسته</a>
@@ -152,8 +152,8 @@
                   </li>
                 </ul>
               </li>
-              <li><a href="about-us.html">درباره ما</a></li>
-              <li><a href="contact.html">تماس با ما</a></li>
+              <li routerLinkActive="active"><a [routerLink]="'about-us'">درباره ما</a></li>
+              <li routerLinkActive="active"><a [routerLink]="'contact-us'">تماس با ما</a></li>
             </ul>
 
             <!--  ==========  -->

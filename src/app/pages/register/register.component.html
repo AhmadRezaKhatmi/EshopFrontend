@@ -111,3 +111,12 @@
   </div>
 </div>
 
+<swal
+  #sweetAlert
+  text="ایمیل وارد شده : {{this.registerForm.controls.email.value }} تکراری میباشد"
+  title="اخطار"
+  icon="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true">
+</swal>
+

@@ -13,4 +13,12 @@ export class ContactUsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  confirm(data: any) {
+    console.log(data);
+  }
+
+  cancel(data: any) {
+    console.log(data);
+  }
+
 }

@@ -17,6 +17,10 @@ import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {ContactUsComponent} from './pages/contact-us/contact-us.component';
 import {AppRoutingModule} from './app-routing.module';
 import {EshopInterceptor} from './Utilities/EshopInterceptor';
+import {LoginComponent} from './pages/login/login.component';
+import {RegisterComponent} from './pages/register/register.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,15 +35,20 @@ import {EshopInterceptor} from './Utilities/EshopInterceptor';
     LatestNewsComponent,
     BrandsComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     SliderService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: EshopInterceptor,

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CurrentUser} from '../../DTOs/Account/CurrentUser';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-site-header',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiteHeaderComponent implements OnInit {
 
-  constructor() { }
+  user: CurrentUser = null;
+
+  constructor(
+    private authService: AuthService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.authService.getCurrentUser().subscribe(user => {
+      this.user = user;
+      console.log(user);
+    });
   }
 
 }

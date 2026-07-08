@@ -22,6 +22,7 @@ import {RegisterComponent} from './pages/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth.service';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
       provide: HTTP_INTERCEPTORS,
       useClass: EshopInterceptor,
       multi: true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -12,7 +12,7 @@
         <a class="brand" href="index.html">
           <img src="/assets/images/logo.png" alt="Webmarket Logo" width="48" height="48"/>
           <span class="pacifico">Webmarket</span>
-          <span class="tagline">قالب فروشگاهی HTML قدرتمند</span>
+          <span class="tagline" *ngIf="user != null">{{user.firstName + ' ' + user.lastName}} عزیز ، خوش آمدید</span>
         </a>
       </div>
 
@@ -34,33 +34,15 @@
                 <li><a href="#"><i class="famfamfam-flag-es"></i> اسپانیولی (ES)</a></li>
               </ul>
             </div>
-            <div class="dropdown js-selectable-dropdown">
-              <a data-toggle="dropdown" class="selected" href="#"><span class="js-change-text">USD ($)</span> <b
-                class="caret"></b></a>
-              <ul class="dropdown-menu js-possibilities" role="menu" aria-labelledby="dLabel">
-                <li><a href="#">USD ($)</a></li>
-                <li><a href="#">EUR (€)</a></li>
-                <li><a href="#">YEN (¥)</a></li>
-                <li><a href="#">GBP (£)</a></li>
-              </ul>
-            </div>
           </div>
         </div>
         <div class="top-right">
-          <div class="icons">
-            <a href="http://www.facebook.com/ProteusNet"><span class="zocial-facebook"></span></a>
-            <a href="skype:primozcigler?call"><span class="zocial-skype"></span></a>
-            <a href="https://twitter.com/proteusnetcom"><span class="zocial-twitter"></span></a>
-            <a href="http://eepurl.com/xFPYD"><span class="zocial-rss"></span></a>
-            <a href="#"><span class="zocial-wordpress"></span></a>
-            <a href="#"><span class="zocial-android"></span></a>
-            <a href="#"><span class="zocial-html5"></span></a>
-            <a href="#"><span class="zocial-windows"></span></a>
-            <a href="#"><span class="zocial-apple"></span></a>
-          </div>
-          <div class="register">
+          <div class="register" *ngIf="user == null">
             <a routerLink="login" role="button" data-toggle="modal">ورود</a> یا
             <a routerLink="register" role="button" data-toggle="modal">ثبت نام</a>
+          </div>
+          <div class="register" *ngIf="user != null">
+            <a routerLink="login" role="button" data-toggle="modal">خروج</a>
           </div>
         </div>
       </div> <!-- /social icons -->

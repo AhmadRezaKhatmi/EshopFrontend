@@ -23,6 +23,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth.service';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {CookieService} from 'ngx-cookie-service';
+import {ActiveAccountComponent} from './pages/active-account/active-account.component';
+import {ProductsComponent} from './pages/products/products.component';
+import {ProductsService} from './services/products.service';
+import {SingleProductComponent} from './SharedComponents/single-product/single-product.component';
+import {NgxLoadingModule} from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,10 @@ import {CookieService} from 'ngx-cookie-service';
     AboutUsComponent,
     ContactUsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ActiveAccountComponent,
+    ProductsComponent,
+    SingleProductComponent
   ],
   imports: [
     BrowserModule,
@@ -47,11 +55,15 @@ import {CookieService} from 'ngx-cookie-service';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgxLoadingModule.forRoot({
+      fullScreenBackdrop: true,
+    })
   ],
   providers: [
     SliderService,
     CookieService,
+    ProductsService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

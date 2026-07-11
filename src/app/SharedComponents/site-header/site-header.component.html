@@ -42,7 +42,7 @@
             <a routerLink="register" role="button" data-toggle="modal">ثبت نام</a>
           </div>
           <div class="register" *ngIf="user != null">
-            <a routerLink="login" role="button" data-toggle="modal">خروج</a>
+            <a role="button" (click)="logOutUser()">خروج</a>
           </div>
         </div>
       </div> <!-- /social icons -->

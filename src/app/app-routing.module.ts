@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {path: 'contact-us', component: ContactUsComponent},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 

@@ -51,13 +51,13 @@ import {CookieService} from 'ngx-cookie-service';
   ],
   providers: [
     SliderService,
+    CookieService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: EshopInterceptor,
       multi: true
-    },
-    CookieService
+    }
   ],
   bootstrap: [AppComponent]
 })

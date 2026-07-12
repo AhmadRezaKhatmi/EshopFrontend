@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {FilterProductsDTO} from '../../DTOs/Products/FilterProductsDTO';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ProductCategory} from '../../DTOs/Products/ProductCategory';
+
+declare function jqUiSlider();
+
 
 @Component({
   selector: 'app-products',
@@ -15,6 +19,8 @@ export class ProductsComponent implements OnInit {
   );
   isLoading = true;
   pages: number[] = [];
+  categories: ProductCategory[] = [];
+  selectedCategories: number[] = [];
 
   constructor(
     private productsService: ProductsService,
@@ -29,10 +35,30 @@ export class ProductsComponent implements OnInit {
       if (params.pageId !== undefined) {
         pageId = parseInt(params.pageId, 0);
       }
-
       this.filterProducts.pageId = pageId;
       this.getProducts();
     });
+
+    this.productsService.getProductActiveCategories().subscribe(res => {
+      if (res.status === 'Success') {
+        this.categories = res.data;
+        console.log(this.categories);
+      }
+    });
+
+    jqUiSlider();
+  }
+
+  filterCategories(event: any) {
+    const value = event.target.value;
+    if (event.target.checked) {
+      console.log('add', value);
+      this.selectedCategories.push(parseInt(value, 0));
+    } else {
+      console.log('remove', value);
+    }
+
+    console.log(this.selectedCategories);
   }
 
   setPage(page: number) {

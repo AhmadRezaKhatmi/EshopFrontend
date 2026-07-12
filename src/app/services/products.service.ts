@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {FilterProductsDTO} from '../DTOs/Products/FilterProductsDTO';
 import {IResponseResult} from '../DTOs/Common/IResponseResult';
+import {ProductCategory} from '../DTOs/Products/ProductCategory';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class ProductsService {
     }
 
     return this.http.get<IResponseResult<FilterProductsDTO>>('/products/filter-products', {params});
+  }
+
+  getProductActiveCategories(): Observable<IResponseResult<ProductCategory[]>> {
+    return this.http.get<IResponseResult<ProductCategory[]>>('/products/product-active-categories');
   }
 }

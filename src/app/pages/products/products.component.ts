@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {FilterProductsDTO} from '../../DTOs/Products/FilterProductsDTO';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -9,19 +10,46 @@ import {FilterProductsDTO} from '../../DTOs/Products/FilterProductsDTO';
 })
 export class ProductsComponent implements OnInit {
 
-  filterProducts: FilterProductsDTO = null;
+  filterProducts: FilterProductsDTO = new FilterProductsDTO(
+    '', 0, 0, 1, 0, 0, 0, 6, 0, 1, []
+  );
   isLoading = true;
+  pages: number[] = [];
 
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.productsService.getFilteredProducts().subscribe(res => {
-      this.filterProducts = res.data;
-      this.isLoading = false;
+    this.activatedRoute.queryParams.subscribe(params => {
+      let pageId = 1;
+      if (params.pageId !== undefined) {
+        pageId = parseInt(params.pageId, 0);
+      }
+
+      this.filterProducts.pageId = pageId;
+      this.getProducts();
     });
   }
 
+  setPage(page: number) {
+    this.router.navigate(['products'], {queryParams: {pageId: page}});
+  }
+
+  getProducts() {
+    this.productsService.getFilteredProducts(this.filterProducts).subscribe(res => {
+      this.filterProducts = res.data;
+      if (res.data.title === null) {
+        this.filterProducts.title = '';
+      }
+      this.isLoading = false;
+      this.pages = [];
+      for (let i = this.filterProducts.startPage; i <= this.filterProducts.endPage; i++) {
+        this.pages.push(i);
+      }
+    });
+  }
 }

@@ -199,14 +199,28 @@
         <!--  ==========  -->
         <!--  = Products =  -->
         <!--  ==========  -->
-        <div class="row popup-products" *ngIf="filterProducts">
+        <div class="row popup-products" *ngIf="filterProducts.products.length">
           <div id="isotopeContainer" class="isotope-container">
-            <app-single-product *ngFor="let product of filterProducts.products"
-                                [product]="product"></app-single-product>
-
+            <app-single-product
+              *ngFor="let product of filterProducts.products"
+              [product]="product">
+            </app-single-product>
+            <div class="clearfix"></div>
+            <hr>
+            <div class="pagination pull-left">
+              <ul>
+                <li><a href="#" class="btn btn-primary"><span class="icon-chevron-left"></span></a></li>
+                <li
+                  [ngClass]="{'active':page === filterProducts.activePage}"
+                  *ngFor="let page of pages"
+                  (click)="setPage(page)"
+                >
+                  <a class="cursor-pointer">{{page}}</a></li>
+                <li><a href="#" class="btn btn-primary"><span class="icon-chevron-right"></span></a></li>
+              </ul>
+            </div>
           </div>
         </div>
-        <hr/>
       </section> <!-- /main content -->
     </div>
   </div>

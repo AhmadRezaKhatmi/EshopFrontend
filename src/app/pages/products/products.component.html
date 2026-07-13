@@ -80,6 +80,31 @@
                 <input type="text" data-initial="99" class="min-val" disabled/>
               </div>
             </div>
+            <div>
+              <p>
+                <mat-slider
+                  thumbLabel
+                  tickInterval="10000"
+                  min="0"
+                  max="1000000"
+                  [displayWith]="formatLabel"
+                  (change)="setMinPrice($event)"
+                ></mat-slider>
+                <span>{{filterProducts.startPrice}}</span>
+              </p>
+              <p>
+                <mat-slider
+                  thumbLabel
+                  tickInterval="10000"
+                  [min]="filterProducts.startPrice"
+                  max="1000000"
+                  [displayWith]="formatLabel"
+                  (change)="setMaxPrice($event)"
+                ></mat-slider>
+                <span>{{filterProducts.endPrice}}</span>
+              </p>
+              <button class="btn btn-success btn-block" (click)="filterButton()">فیلتر</button>
+            </div>
           </div> <!-- /prices slider -->
           <a href="#" class="remove-filter" id="removeFilters">
             <span class="icon-ban-circle"></span>

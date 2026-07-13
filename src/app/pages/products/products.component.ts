@@ -36,19 +36,47 @@ export class ProductsComponent implements OnInit {
         pageId = parseInt(params.pageId, 0);
       }
       this.filterProducts.categories = params.categories ? params.categories : [];
-      console.log(this.filterProducts.categories);
       this.filterProducts.pageId = pageId;
+      this.filterProducts.startPrice = params.startPrice ? params.startPrice : 0;
+      this.filterProducts.endPrice = params.endPrice ? params.endPrice : 0;
       this.getProducts();
     });
 
     this.productsService.getProductActiveCategories().subscribe(res => {
       if (res.status === 'Success') {
         this.categories = res.data;
-        console.log(this.categories);
       }
     });
 
     jqUiSlider();
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
+  }
+
+  setMinPrice(event: any) {
+    this.filterProducts.startPrice = parseInt(event.value, 0);
+  }
+
+  setMaxPrice(event: any) {
+    this.filterProducts.endPrice = parseInt(event.value, 0);
+  }
+
+  filterButton() {
+    this.router.navigate(
+      ['products'], {
+        queryParams: {
+          categories: this.filterProducts.categories,
+          startPrice: this.filterProducts.startPrice,
+          endPrice: this.filterProducts.endPrice
+        }
+      }
+    );
   }
 
   changeOrder(event: any) {
@@ -62,7 +90,9 @@ export class ProductsComponent implements OnInit {
           queryParams: {
             pageId: this.filterProducts.activePage,
             categories: this.filterProducts.categories,
-            orderBy: 'priceAsc'
+            orderBy: 'priceAsc',
+            startPrice: this.filterProducts.startPrice,
+            endPrice: this.filterProducts.endPrice
           }
         });
         break;
@@ -71,7 +101,9 @@ export class ProductsComponent implements OnInit {
           queryParams: {
             pageId: this.filterProducts.activePage,
             categories: this.filterProducts.categories,
-            orderBy: 'priceDes'
+            orderBy: 'priceDes',
+            startPrice: this.filterProducts.startPrice,
+            endPrice: this.filterProducts.endPrice
           }
         });
         break;
@@ -101,7 +133,15 @@ export class ProductsComponent implements OnInit {
   }
 
   setPage(page: number) {
-    this.router.navigate(['products'], {queryParams: {pageId: page, categories: this.filterProducts.categories}});
+    this.router.navigate(
+      ['products'], {
+        queryParams: {
+          pageId: page,
+          categories: this.filterProducts.categories,
+          startPrice: this.filterProducts.startPrice,
+          endPrice: this.filterProducts.endPrice
+        }
+      });
   }
 
   getProducts() {

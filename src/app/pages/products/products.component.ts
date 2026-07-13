@@ -15,12 +15,11 @@ declare function jqUiSlider();
 export class ProductsComponent implements OnInit {
 
   filterProducts: FilterProductsDTO = new FilterProductsDTO(
-    '', 0, 0, 1, 0, 0, 0, 6, 0, 1, []
+    '', 0, 0, 1, 0, 0, 0, 6, 0, 1, [], []
   );
   isLoading = true;
   pages: number[] = [];
   categories: ProductCategory[] = [];
-  selectedCategories: number[] = [];
 
   constructor(
     private productsService: ProductsService,
@@ -35,6 +34,8 @@ export class ProductsComponent implements OnInit {
       if (params.pageId !== undefined) {
         pageId = parseInt(params.pageId, 0);
       }
+      this.filterProducts.categories = params.categories ? params.categories : [];
+      console.log(this.filterProducts.categories);
       this.filterProducts.pageId = pageId;
       this.getProducts();
     });
@@ -51,18 +52,28 @@ export class ProductsComponent implements OnInit {
 
   filterCategories(event: any) {
     const value = event.target.value;
-    if (event.target.checked) {
-      console.log('add', value);
-      this.selectedCategories.push(parseInt(value, 0));
-    } else {
-      console.log('remove', value);
+    if (this.filterProducts.categories === undefined || this.filterProducts.categories === null) {
+      this.filterProducts.categories = [];
     }
+    if (event.target.checked) {
+      this.filterProducts.categories.push(parseInt(value, 0));
+      this.setCategoriesFilter();
+    } else {
+      this.filterProducts.categories = this.filterProducts.categories.filter(s => s !== parseInt(value, 0));
+      this.setCategoriesFilter();
+    }
+  }
 
-    console.log(this.selectedCategories);
+  setCategoriesFilter() {
+    if (this.filterProducts.categories.length > 0) {
+      this.router.navigate(['products'], {queryParams: {categories: this.filterProducts.categories}});
+    } else {
+      this.router.navigate(['products']);
+    }
   }
 
   setPage(page: number) {
-    this.router.navigate(['products'], {queryParams: {pageId: page}});
+    this.router.navigate(['products'], {queryParams: {pageId: page, categories: this.filterProducts.categories}});
   }
 
   getProducts() {
@@ -73,6 +84,10 @@ export class ProductsComponent implements OnInit {
       }
       this.isLoading = false;
       this.pages = [];
+      if (res.data.categories === null) {
+        this.filterProducts.categories = [];
+      }
+
       for (let i = this.filterProducts.startPage; i <= this.filterProducts.endPage; i++) {
         this.pages.push(i);
       }

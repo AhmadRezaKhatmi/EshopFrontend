@@ -54,7 +54,10 @@
                 <fieldset *ngIf="categories.length > 0">
                   <label [for]="'cat_' + cat.id" class="checkbox" *ngFor="let cat of categories">
                     <input type="checkbox" [value]="cat.id" [id]="'cat_' + cat.id"
-                           (change)="filterCategories($event)">{{cat.title}}
+                           (change)="filterCategories($event)"
+                           [checked]="filterProducts.categories?.indexOf(cat.id) >= 0"
+                    >
+                    {{cat.title}}
                   </label>
                 </fieldset>
               </div>

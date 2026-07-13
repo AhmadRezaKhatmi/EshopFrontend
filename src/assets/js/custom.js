@@ -593,6 +593,7 @@ function homeSlider() {
   }
 }
 
+
 function jqUiSlider() {
   var prepareCurrency = function (value) {
     return WebMarketVars.currencyBefore ? WebMarketVars.currencySymbol + value : value + WebMarketVars.currencySymbol;
@@ -609,7 +610,7 @@ function jqUiSlider() {
       $(this).parent().siblings(".max-val").val(prepareCurrency(ui.values[1]));
     },
     change: function () {
-      updateIsotopeFiltering();
+      // updateIsotopeFiltering();
     },
     create: function () {
       var $sliderParent = $(this).parents(".accordion-body");

@@ -15,7 +15,7 @@ export class ProductsService {
   }
 
   getFilteredProducts(filter: FilterProductsDTO): Observable<IResponseResult<FilterProductsDTO>> {
-    let params;
+    let params = new HttpParams();
     if (filter !== null) {
       params = new HttpParams()
         .set('pageId', filter.pageId.toString())
@@ -23,8 +23,10 @@ export class ProductsService {
         .set('startPrice', filter.startPrice.toString())
         .set('endPrice', filter.endPrice.toString())
         .set('takeEntity', filter.takeEntity.toString());
+      for (const category of filter.categories) {
+        params = params.append('categories', category.toString());
+      }
     }
-
     return this.http.get<IResponseResult<FilterProductsDTO>>('/products/filter-products', {params});
   }
 

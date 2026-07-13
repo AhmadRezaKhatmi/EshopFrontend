@@ -593,7 +593,6 @@ function homeSlider() {
   }
 }
 
-
 function jqUiSlider() {
   var prepareCurrency = function (value) {
     return WebMarketVars.currencyBefore ? WebMarketVars.currencySymbol + value : value + WebMarketVars.currencySymbol;

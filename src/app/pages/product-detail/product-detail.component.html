@@ -38,18 +38,19 @@
       <div class="span5">
         <div class="product-preview">
           <div class="picture">
-            <img [src]="imagePath + product.imageName" [alt]="product.productName" width="940" height="940"
+            <img [src]="mainImage" [alt]="product.productName" width="940" height="940"
                  id="mainPreviewImg">
           </div>
           <div class="thumbs clearfix" *ngIf="galleries">
-            <div class="thumb active">
-              <a href="#mainPreviewImg">
+            <div class="thumb" [ngClass]="{'active':selectedImageId === 0}" (click)="selectImage(0)">
+              <a>
                 <img [src]="imagePath + product.imageName" [alt]="product.productName" alt="" width="940"
                      height="940">
               </a>
             </div>
-            <div class="thumb" *ngFor="let gallery of galleries">
-              <a href="#mainPreviewImg">
+            <div class="thumb" [ngClass]="{'active':selectedImageId === gallery.id}" *ngFor="let gallery of galleries"
+                 (click)="selectImage(gallery.id)">
+              <a>
                 <img [src]="imageGalleryPath + gallery.imageName" [alt]="product.productName" alt="" width="940"
                      height="940">
               </a>

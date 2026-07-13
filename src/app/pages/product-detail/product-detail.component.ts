@@ -16,6 +16,8 @@ export class ProductDetailComponent implements OnInit {
   imageGalleryPath = ImageGalleryPath;
   product: Product;
   galleries: ProductGallery[];
+  mainImage: string;
+  selectedImageId = 0;
 
   constructor(
     private productService: ProductsService,
@@ -37,9 +39,20 @@ export class ProductDetailComponent implements OnInit {
         } else if (res.status === 'Success') {
           this.product = res.data.product;
           this.galleries = res.data.galleries;
+          this.mainImage = ImagePath + this.product.imageName;
         }
       });
     });
+  }
+
+  selectImage(imageId: number) {
+    this.selectedImageId = imageId;
+    if (imageId !== 0) {
+      const gallery = this.galleries.filter(g => g.id === imageId)[0];
+      this.mainImage = this.imageGalleryPath + gallery.imageName;
+    } else {
+      this.mainImage = this.imagePath + this.product.imageName;
+    }
   }
 
 }

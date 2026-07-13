@@ -103,16 +103,14 @@
             </div>
             <div class="span4">
               <div class="form-inline sorting-by" id="tourStep4">
-                <label for="isotopeSorting" class="black-clr">چینش :</label>
-                <select id="isotopeSorting" class="span3">
-                  <option value='{"sortBy":"price", "sortAscending":"true"}'>بر اساس قیمت (کم به زیاد) &uarr;</option>
-                  <option value='{"sortBy":"price", "sortAscending":"false"}'>بر اساس قیمت (زیاد به کم) &darr;</option>
-                  <option value='{"sortBy":"name", "sortAscending":"true"}'>بر اساس نام (صعودی) &uarr;</option>
-                  <option value='{"sortBy":"name", "sortAscending":"false"}'>بر اساس نام (نزولی) &darr;</option>
-                  <option value='{"sortBy":"popularity", "sortAscending":"true"}'>بر اساس محبوبیت (کم به زیاد) &uarr;
-                  </option>
-                  <option value='{"sortBy":"popularity", "sortAscending":"false"}'>بر اساس محبوبیت (زیاد به کم) &darr;
-                  </option>
+                <label for="orderBy" class="black-clr">چینش :</label>
+                <select [(ngModel)]="filterProducts.orderBy" id="orderBy" class="span3"
+                        (change)="changeOrder($event)">
+
+                  <optgroup label="قیمت">
+                    <option value='0'>بر اساس قیمت (کم به زیاد) &uarr;</option>
+                    <option value='1'>بر اساس قیمت (زیاد به کم) &darr;</option>
+                  </optgroup>
                 </select>
               </div>
             </div>

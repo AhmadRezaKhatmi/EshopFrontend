@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {FilterProductsDTO} from '../../DTOs/Products/FilterProductsDTO';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductCategory} from '../../DTOs/Products/ProductCategory';
+import {ProductsOrderBy} from '../../DTOs/Products/ProductsOrderBy';
 
 declare function jqUiSlider();
 
@@ -15,7 +16,7 @@ declare function jqUiSlider();
 export class ProductsComponent implements OnInit {
 
   filterProducts: FilterProductsDTO = new FilterProductsDTO(
-    '', 0, 0, 1, 0, 0, 0, 6, 0, 1, [], []
+    '', 0, 0, 1, 0, 0, 0, 6, 0, 1, null, [], []
   );
   isLoading = true;
   pages: number[] = [];
@@ -48,6 +49,33 @@ export class ProductsComponent implements OnInit {
     });
 
     jqUiSlider();
+  }
+
+  changeOrder(event: any) {
+    // console.log(event);
+    console.log(this.filterProducts);
+    this.getProducts();
+
+    switch (event.target.value) {
+      case ProductsOrderBy.PriceAsc.toString():
+        this.router.navigate(['products'], {
+          queryParams: {
+            pageId: this.filterProducts.activePage,
+            categories: this.filterProducts.categories,
+            orderBy: 'priceAsc'
+          }
+        });
+        break;
+      case ProductsOrderBy.PriceDes.toString():
+        this.router.navigate(['products'], {
+          queryParams: {
+            pageId: this.filterProducts.activePage,
+            categories: this.filterProducts.categories,
+            orderBy: 'priceDes'
+          }
+        });
+        break;
+    }
   }
 
   filterCategories(event: any) {

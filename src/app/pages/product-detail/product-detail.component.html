@@ -41,22 +41,26 @@
             <img [src]="imagePath + product.imageName" [alt]="product.productName" width="940" height="940"
                  id="mainPreviewImg">
           </div>
-          <div class="thumbs clearfix">
+          <div class="thumbs clearfix" *ngIf="galleries">
             <div class="thumb active">
-              <a href="#mainPreviewImg"><img [src]="imagePath + product.imageName" [alt]="product.productName" alt=""
-                                             width="940"
-                                             height="940"></a>
+              <a href="#mainPreviewImg">
+                <img [src]="imagePath + product.imageName" [alt]="product.productName" alt="" width="940"
+                     height="940">
+              </a>
             </div>
-            <div class="thumb">
-              <a href="#mainPreviewImg"><img [src]="imagePath + product.imageName" [alt]="product.productName" alt=""
-                                             width="940"
-                                             height="940"></a>
+            <div class="thumb" *ngFor="let gallery of galleries">
+              <a href="#mainPreviewImg">
+                <img [src]="imageGalleryPath + gallery.imageName" [alt]="product.productName" alt="" width="940"
+                     height="940">
+              </a>
             </div>
-            <div class="thumb">
-              <a href="#mainPreviewImg"><img [src]="imagePath + product.imageName" [alt]="product.productName" alt=""
-                                             width="940"
-                                             height="940"></a>
-            </div>
+            <!--<div class="thumb" [ngClass]="{'active':isFirst}"
+                 *ngFor="let gallery of galleries; index as i;first as isFirst">
+              <a href="#mainPreviewImg">
+                <img [src]="imageGalleryPath + gallery.imageName" [alt]="product.productName" alt="" width="940"
+                     height="940">
+              </a>
+            </div>-->
           </div>
         </div>
       </div>

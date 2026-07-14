@@ -30,7 +30,8 @@ import {SingleProductComponent} from './SharedComponents/single-product/single-p
 import {NgxLoadingModule} from 'ngx-loading';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
-import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import {ProductDetailComponent} from './pages/product-detail/product-detail.component';
+import {OrderService} from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
     SliderService,
     CookieService,
     ProductsService,
+    OrderService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

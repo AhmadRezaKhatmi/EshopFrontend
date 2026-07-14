@@ -13,7 +13,7 @@
             [routerLink]="['/products',product.id,productName]">
             توضیحات بیشتر
           </a>
-          <a class="btn buy btn-danger" href="#">اضافه به سبد خرید</a>
+          <a class="btn buy btn-danger" (click)="addProductToOrder()">اضافه به سبد خرید</a>
         </div>
       </div>
     </div>
@@ -23,3 +23,11 @@
     </div>
   </div>
 </div> <!-- /single product -->
+<swal
+  #sweetAlert
+  text=""
+  title="اطلاعیه"
+  icon="success"
+  [showCancelButton]="true"
+  [focusCancel]="true">
+</swal>

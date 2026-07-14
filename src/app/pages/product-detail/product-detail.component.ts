@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ImageGalleryPath, ImagePath} from '../../Utilities/PathTools';
@@ -9,6 +9,8 @@ import {CurrentUser} from '../../DTOs/Account/CurrentUser';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AddProductComment} from '../../DTOs/Products/AddProductComment';
+import {OrderService} from '../../services/order.service';
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
@@ -27,12 +29,15 @@ export class ProductDetailComponent implements OnInit {
   productComments: ProductCommentDTO[] = [];
   currentUser: CurrentUser = null;
   commentForm: FormGroup;
+  count = 1;
+  @ViewChild('sweetAlert') private sweetAlert: SwalComponent;
 
   constructor(
     private productService: ProductsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private orderService: OrderService
   ) {
   }
 
@@ -99,6 +104,27 @@ export class ProductDetailComponent implements OnInit {
           this.productComments.unshift(commentDTO);
           this.commentForm.reset();
         }
+      });
+    }
+  }
+
+  addCount() {
+    this.count += 1;
+  }
+
+  minusCount() {
+    if (this.count > 1) {
+      this.count -= 1;
+    }
+  }
+
+  addProductToOrder() {
+    const productId = this.product.id;
+    const count = this.count;
+    if (count >= 1) {
+      this.orderService.addProductToOrder(productId, count).subscribe(res => {
+        this.sweetAlert.text = res.data.message;
+        this.sweetAlert.fire();
       });
     }
   }

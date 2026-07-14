@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Product} from '../../DTOs/Products/Product';
 import {ImagePath} from '../../Utilities/PathTools';
+import {OrderService} from '../../services/order.service';
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-single-product',
@@ -12,12 +14,25 @@ export class SingleProductComponent implements OnInit {
   @Input() product: Product;
   imagePath = ImagePath;
   productName: string;
+  @ViewChild('sweetAlert') private sweetAlert: SwalComponent;
 
-  constructor() {
+  constructor(
+    private orderService: OrderService
+  ) {
   }
 
   ngOnInit(): void {
     this.productName = this.product.productName.replace(/\s/g, '-');
+  }
+
+  addProductToOrder() {
+    const productId = this.product.id;
+    const count = 1;
+    this.orderService.addProductToOrder(productId, count).subscribe(res => {
+      this.sweetAlert.text = res.data.message;
+      this.sweetAlert.fire();
+    });
+
   }
 
 }

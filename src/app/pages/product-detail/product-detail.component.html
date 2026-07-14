@@ -141,9 +141,61 @@
             {{product.description}}
           </div>
           <div class="fade tab-pane" id="tab-2">
-            <p>
-              نظرات
-            </p>
+            <section id="comments" class="comments-container">
+              <div *ngIf="productComments.length > 0">
+                <h3 class="push-down-25"><span class="light">{{productComments.length}}</span> نظر</h3>
+
+                <div class="single-comment clearfix" *ngFor="let comment of productComments">
+                  <div class="avatar-container">
+                    <img src="/assets/images/dummy/avatars/avatar-1.jpg" alt="avatar" class="avatar" width="184"
+                         height="184">
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-inner">
+                      <cite class="author-name">
+                        <span class="light">{{comment.userFullName}}</span>
+                      </cite>
+                      <div class="metadata">
+                        {{comment.createDate}} / <a href="#">پاسخ</a>
+                      </div>
+                      <div class="comment-text" [innerHTML]="comment.text">
+                        <!--<p>
+                          {{comment.text}}
+                        </p>-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+              </div>
+
+              <div *ngIf="currentUser">
+                <h3 class="push-down-25"><span class="light">نظر</span> بدهید</h3>
+
+                <form class="form form-inline form-comments" [formGroup]="commentForm" (ngSubmit)="addComment()">
+
+                  <p class="push-down-20">
+                  <textarea class="input-block-level" tabindex="0" rows="7" cols="70"
+                            placeholder="نظرتان را در اینجا بنویسید ..." formControlName="text"></textarea>
+                  </p>
+                  <p class="text-error"
+                     *ngIf="commentForm.controls.text.errors?.required && commentForm.controls.text.touched">
+                    لطفا متن نظر خود را وارد نمایید
+                  </p>
+                  <p class="text-error"
+                     *ngIf="commentForm.controls.text.errors?.maxlength && commentForm.controls.text.touched">
+                    متن نظر نمیتواند بیشتر از 1000 کاراکتر باشد
+                  </p>
+                  <p>
+                    <button class="btn btn-primary bold" type="submit" tabindex="5" id="submit"
+                            [disabled]="commentForm.invalid">ارسال نظر
+                    </button>
+                  </p>
+                </form>
+              </div>
+
+            </section>
           </div>
         </div>
       </div>

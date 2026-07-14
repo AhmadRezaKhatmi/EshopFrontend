@@ -6,6 +6,8 @@ import {IResponseResult} from '../DTOs/Common/IResponseResult';
 import {ProductCategory} from '../DTOs/Products/ProductCategory';
 import {Product} from '../DTOs/Products/Product';
 import {ProductDetailDTO} from '../DTOs/Products/ProductDetailDTO';
+import {ProductCommentDTO} from '../DTOs/Products/ProductCommentDTO';
+import {AddProductComment} from '../DTOs/Products/AddProductComment';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +48,13 @@ export class ProductsService {
 
   getRelatedProducts(productId: number): Observable<IResponseResult<Product[]>> {
     return this.http.get<IResponseResult<Product[]>>('/products/related-products/' + productId);
+  }
+
+  getProductComments(productId: number): Observable<IResponseResult<ProductCommentDTO[]>> {
+    return this.http.get<IResponseResult<ProductCommentDTO[]>>('/products/product-comments/' + productId);
+  }
+
+  addProductComment(comment: AddProductComment): Observable<IResponseResult<ProductCommentDTO>> {
+    return this.http.post<IResponseResult<ProductCommentDTO>>('/products/add-product-comment', comment);
   }
 }

@@ -4,6 +4,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ImageGalleryPath, ImagePath} from '../../Utilities/PathTools';
 import {Product} from '../../DTOs/Products/Product';
 import {ProductGallery} from '../../DTOs/Products/ProductGallery';
+import {ProductCommentDTO} from '../../DTOs/Products/ProductCommentDTO';
+import {CurrentUser} from '../../DTOs/Account/CurrentUser';
+import {AuthService} from '../../services/auth.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AddProductComment} from '../../DTOs/Products/AddProductComment';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,15 +24,25 @@ export class ProductDetailComponent implements OnInit {
   mainImage: string;
   selectedImageId = 0;
   relatedProducts: Product[] = [];
+  productComments: ProductCommentDTO[] = [];
+  currentUser: CurrentUser = null;
+  commentForm: FormGroup;
 
   constructor(
     private productService: ProductsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
+
+    this.authService.getCurrentUser().subscribe(res => {
+      if (res !== null) {
+        this.currentUser = res;
+      }
+    });
     this.activatedRoute.params.subscribe(params => {
       const productId = params.productId;
       if (productId === undefined) {
@@ -50,7 +65,16 @@ export class ProductDetailComponent implements OnInit {
         });
       });
 
+      this.productService.getProductComments(productId).subscribe(res => {
+        this.productComments = res.data;
+      });
+    });
 
+    this.commentForm = new FormGroup({
+      text: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(1000)
+      ])
     });
   }
 
@@ -64,4 +88,18 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+  addComment() {
+    if (this.commentForm.valid) {
+      const comment = new AddProductComment(this.product.id, this.commentForm.controls.text.value);
+      // add comment to database
+      this.productService.addProductComment(comment).subscribe(res => {
+        if (res.status === 'Success') {
+          const commentDTO = res.data;
+          commentDTO.userFullName = this.currentUser.firstName + ' ' + this.currentUser.lastName;
+          this.productComments.unshift(commentDTO);
+          this.commentForm.reset();
+        }
+      });
+    }
+  }
 }

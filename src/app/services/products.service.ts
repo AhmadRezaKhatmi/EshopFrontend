@@ -43,4 +43,8 @@ export class ProductsService {
   getSingleProduct(productId: number): Observable<IResponseResult<ProductDetailDTO>> {
     return this.http.get<IResponseResult<ProductDetailDTO>>('/products/single-product/' + productId);
   }
+
+  getRelatedProducts(productId: number): Observable<IResponseResult<Product[]>> {
+    return this.http.get<IResponseResult<Product[]>>('/products/related-products/' + productId);
+  }
 }

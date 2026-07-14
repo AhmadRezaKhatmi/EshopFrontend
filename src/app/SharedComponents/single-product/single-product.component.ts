@@ -11,11 +11,13 @@ export class SingleProductComponent implements OnInit {
 
   @Input() product: Product;
   imagePath = ImagePath;
+  productName: string;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.productName = this.product.productName.replace(/\s/g, '-');
   }
 
 }

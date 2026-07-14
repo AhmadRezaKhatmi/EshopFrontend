@@ -18,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   galleries: ProductGallery[];
   mainImage: string;
   selectedImageId = 0;
+  relatedProducts: Product[] = [];
 
   constructor(
     private productService: ProductsService,
@@ -41,7 +42,15 @@ export class ProductDetailComponent implements OnInit {
           this.galleries = res.data.galleries;
           this.mainImage = ImagePath + this.product.imageName;
         }
+
+        this.productService.getRelatedProducts(productId).subscribe(result => {
+          if (result.status === 'Success') {
+            this.relatedProducts = result.data;
+          }
+        });
       });
+
+
     });
   }
 

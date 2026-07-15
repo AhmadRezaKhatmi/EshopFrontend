@@ -125,6 +125,8 @@ export class ProductDetailComponent implements OnInit {
       this.orderService.addProductToOrder(productId, count).subscribe(res => {
         this.sweetAlert.text = res.data.message;
         this.sweetAlert.fire();
+        console.log(res.data);
+        this.orderService._setOrderDetails(res.data.details);
       });
     }
   }

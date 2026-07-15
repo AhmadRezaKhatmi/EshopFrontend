@@ -32,6 +32,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
 import {ProductDetailComponent} from './pages/product-detail/product-detail.component';
 import {OrderService} from './services/order.service';
+import {HeaderBasketComponent} from './SharedComponents/header-basket/header-basket.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {OrderService} from './services/order.service';
     ActiveAccountComponent,
     ProductsComponent,
     SingleProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    HeaderBasketComponent
   ],
   imports: [
     BrowserModule,

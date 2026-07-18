@@ -9,16 +9,18 @@ import {ActiveAccountComponent} from './pages/active-account/active-account.comp
 import {ProductsComponent} from './pages/products/products.component';
 import {ProductDetailComponent} from './pages/product-detail/product-detail.component';
 import {UserAuthGuard} from './Utilities/UserAuthGuard';
+import {EditAccountComponent} from './pages/account/edit-account/edit-account.component';
 
 const appRoutes: Routes = [
   {path: '', component: IndexComponent},
-  {path: 'contact-us', component: ContactUsComponent, canActivate: [UserAuthGuard]},
+  {path: 'contact-us', component: ContactUsComponent},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'activate-account/:activeCode', component: ActiveAccountComponent},
   {path: 'products', component: ProductsComponent},
-  {path: 'products/:productId/:productName', component: ProductDetailComponent}
+  {path: 'products/:productId/:productName', component: ProductDetailComponent},
+  {path: 'user/edit', component: EditAccountComponent, canActivate: [UserAuthGuard]}
 ];
 
 

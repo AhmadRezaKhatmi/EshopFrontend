@@ -8,10 +8,11 @@ import {RegisterComponent} from './pages/register/register.component';
 import {ActiveAccountComponent} from './pages/active-account/active-account.component';
 import {ProductsComponent} from './pages/products/products.component';
 import {ProductDetailComponent} from './pages/product-detail/product-detail.component';
+import {UserAuthGuard} from './Utilities/UserAuthGuard';
 
 const appRoutes: Routes = [
   {path: '', component: IndexComponent},
-  {path: 'contact-us', component: ContactUsComponent},
+  {path: 'contact-us', component: ContactUsComponent, canActivate: [UserAuthGuard]},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

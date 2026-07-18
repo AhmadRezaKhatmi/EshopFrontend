@@ -11,7 +11,7 @@ import {ICheckUserAuthResult} from '../DTOs/Account/ICheckUserAuthResult';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private loggedIn = false;
   private currentUser: BehaviorSubject<CurrentUser> = new BehaviorSubject<CurrentUser>(null);
 
   constructor(
@@ -21,6 +21,15 @@ export class AuthService {
 
   setCurrentUser(user: CurrentUser): void {
     this.currentUser.next(user);
+    this.loggedIn = user !== null;
+  }
+
+  isAuthenticated() {
+    const promise = new Promise((resolve, reject) => {
+      resolve(this.loggedIn);
+    });
+
+    return promise;
   }
 
   getCurrentUser(): Observable<CurrentUser> {

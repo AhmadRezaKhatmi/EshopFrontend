@@ -23,12 +23,16 @@ export class OrderService {
     return this.orderDetails;
   }
 
-  addProductToOrder(productId: number, count: number): Observable<IResponseResult<any>> {
+  addProductToOrder(productId: number, count: number): Observable<IResponseResult<{ message: string, details: OrderBasketDetail[] }>> {
     const params = new HttpParams().set('productId', productId.toString()).set('count', count.toString());
-    return this.http.get<IResponseResult<any>>('/order/add-order', {params});
+    return this.http.get<IResponseResult<{ message: string, details: OrderBasketDetail[] }>>('/order/add-order', {params});
   }
 
   getUserBasketDetails(): Observable<IResponseResult<OrderBasketDetail[]>> {
     return this.http.get<IResponseResult<OrderBasketDetail[]>>('/order/get-order-details');
+  }
+
+  removeOrderDetail(detailId: number): Observable<IResponseResult<OrderBasketDetail[]>> {
+    return this.http.get<IResponseResult<OrderBasketDetail[]>>('/order/remove-order-detail/' + detailId);
   }
 }

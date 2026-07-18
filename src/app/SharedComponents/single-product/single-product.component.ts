@@ -29,10 +29,10 @@ export class SingleProductComponent implements OnInit {
     const productId = this.product.id;
     const count = 1;
     this.orderService.addProductToOrder(productId, count).subscribe(res => {
-      this.sweetAlert.text = res.data.message;
+      this.orderService._setOrderDetails(res.data.details);
+      this.sweetAlert.text = 'محصول با موفقیت به سبد خرید اضافه شد';
       this.sweetAlert.fire();
     });
-
   }
 
 }

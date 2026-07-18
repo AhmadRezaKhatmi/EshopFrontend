@@ -6,6 +6,8 @@ import {LoginUserDTO} from '../DTOs/Account/LoginUserDTO';
 import {ILoginUserAccount} from '../DTOs/Account/ILoginUserAccount';
 import {CurrentUser} from '../DTOs/Account/CurrentUser';
 import {ICheckUserAuthResult} from '../DTOs/Account/ICheckUserAuthResult';
+import {EditUserDTO} from '../DTOs/Account/EditUserDTO';
+import {IResponseResult} from '../DTOs/Common/IResponseResult';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +56,9 @@ export class AuthService {
 
   activateUser(emailActiveCode: string): Observable<any> {
     return this.http.get('/account/activate-account/' + emailActiveCode);
+  }
+
+  editUserAccount(user: EditUserDTO): Observable<IResponseResult<any>> {
+    return this.http.post<IResponseResult<any>>('/account/edit-user', user);
   }
 }

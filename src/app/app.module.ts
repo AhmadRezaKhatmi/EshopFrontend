@@ -34,6 +34,8 @@ import {ProductDetailComponent} from './pages/product-detail/product-detail.comp
 import {OrderService} from './services/order.service';
 import {HeaderBasketComponent} from './SharedComponents/header-basket/header-basket.component';
 import { EditAccountComponent } from './pages/account/edit-account/edit-account.component';
+import { UserBasketComponent } from './pages/account/user-basket/user-basket.component';
+import { UserSidebarComponent } from './SharedComponents/user-sidebar/user-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { EditAccountComponent } from './pages/account/edit-account/edit-account.
     SingleProductComponent,
     ProductDetailComponent,
     HeaderBasketComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    UserBasketComponent,
+    UserSidebarComponent
   ],
   imports: [
     BrowserModule,

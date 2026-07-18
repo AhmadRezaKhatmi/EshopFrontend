@@ -10,6 +10,7 @@ import {ProductsComponent} from './pages/products/products.component';
 import {ProductDetailComponent} from './pages/product-detail/product-detail.component';
 import {UserAuthGuard} from './Utilities/UserAuthGuard';
 import {EditAccountComponent} from './pages/account/edit-account/edit-account.component';
+import {UserBasketComponent} from './pages/account/user-basket/user-basket.component';
 
 const appRoutes: Routes = [
   {path: '', component: IndexComponent},
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
   {path: 'activate-account/:activeCode', component: ActiveAccountComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'products/:productId/:productName', component: ProductDetailComponent},
-  {path: 'user/edit', component: EditAccountComponent, canActivate: [UserAuthGuard]}
+  {path: 'user/edit', component: EditAccountComponent, canActivate: [UserAuthGuard]},
+  {path: 'user/basket', component: UserBasketComponent, canActivate: [UserAuthGuard]}
 ];
 
 
